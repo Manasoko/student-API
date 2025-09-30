@@ -7,19 +7,23 @@ const router = express.Router();
 
 router.get("/students", async (req: Request, res: Response) => {
   const students = await studentModel.find();
-  res.status(200).json(students);
+  return res.status(200).json(students);
 });
 
 router.post("/student", async (req: Request, res: Response) => {
   const { name, studentClass, age, subjects }: Student = req.body;
+
+  if (!name || !studentClass || !age || !subjects)
+    return res.status(400).json({ message: "All fields are required" });
+
   await studentModel.create({
     name: name,
     studentClass: studentClass,
     age: age,
-    subjects: subjects,
+    subjects: [...subjects],
   });
 
-  return res.status(201).json({message: "Created successfully"})
+  return res.status(201).json({ message: "Created successfully" });
 });
 
 router.get("/student/:id", async (req: Request, res: Response) => {
@@ -44,23 +48,28 @@ router.put("/student/:id", async (req: Request, res: Response) => {
     const filteredSubjects = subjects.filter(
       (item, index) => subjects.indexOf(item) === index
     );
-    student.subjects = filteredSubjects;
+    student.subjects = [...filteredSubjects];
 
     await student.save();
-    return res.status(201).json({message: "Updated successfully"})
+    return res.status(201).json({ message: "Updated successfully" });
   } catch (error) {
-    return res.status(500).json({ message: "Something happened", error: error });
+    console.log(error);
+    return res
+      .status(500)
+      .json({ message: "Something happened", error: error });
   }
 });
 
 router.delete("/student/:id", async (req: Request, res: Response) => {
-    const id = req.params.id;
-    try {
-        await studentModel.findByIdAndDelete(id);
-        return res.status(200).json({message: "Deleted successfully"})
-    } catch (error) {
-        return res.status(500).json({ message: "Something happened", error: error });
-    }
+  const id = req.params.id;
+  try {
+    await studentModel.findByIdAndDelete(id);
+    return res.status(200).json({ message: "Deleted successfully" });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Something happened", error: error });
+  }
 });
 
 export default router;

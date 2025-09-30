@@ -7,7 +7,7 @@ const studentSchema = new Schema<Student>({
   name: { type: String, required: true },
   age: { type: Number, required: true },
   studentClass: { type: String, required: true },
-  subjects: [{ name: String }],
+  subjects: [{ type: String, trim: true, required: true }],
 });
 
 const studentModel = model<Student>('Task', studentSchema);
