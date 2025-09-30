@@ -1,0 +1,15 @@
+import mongoose from 'mongoose';
+import type { Student } from '../types/students.js';
+
+const { Schema, model } = mongoose;
+
+const studentSchema = new Schema<Student>({
+  name: { type: String, required: true },
+  age: { type: Number, required: true },
+  studentClass: { type: String, required: true },
+  subjects: [{ name: String }],
+});
+
+const studentModel = model<Student>('Task', studentSchema);
+
+export default studentModel;
