@@ -13,7 +13,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/v1/students",
+					"raw": "http://localhost:3000/students",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -33,7 +33,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/v1/student/68dc4666c8c3d9c3e1a0ed54",
+					"raw": "http://localhost:3000/student/68dc4666c8c3d9c3e1a0ed54",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -117,7 +117,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/v1/student",
+					"raw": "http://localhost:3000/student",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -200,7 +200,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/v1/student/68dc4666c8c3d9c3e1a0ed54",
+					"raw": "http://localhost:3000/student/68dc4666c8c3d9c3e1a0ed54",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -221,7 +221,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/v1/student/68dc45c22ba8c98277fe17f4",
+					"raw": "http://localhost:3000/student/68dc45c22ba8c98277fe17f4",
 					"protocol": "http",
 					"host": [
 						"localhost"

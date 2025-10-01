@@ -1,6 +1,7 @@
 export interface Student {
     _id: string;
-    name: string;
+    firstName: string;
+    lastName: string;
     age: number;
     studentClass: string;
     year_joined?: Date;

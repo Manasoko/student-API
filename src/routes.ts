@@ -11,13 +11,14 @@ router.get("/students", async (req: Request, res: Response) => {
 });
 
 router.post("/student", async (req: Request, res: Response) => {
-  const { name, studentClass, age, subjects }: Student = req.body;
+  const { firstName,lastName, studentClass, age, subjects }: Student = req.body;
 
-  if (!name || !studentClass || !age || !subjects)
+  if (!firstName || !lastName || !studentClass || !age || !subjects)
     return res.status(400).json({ message: "All fields are required" });
 
   await studentModel.create({
-    name: name,
+    firstName: firstName,
+    lastName: lastName,
     studentClass: studentClass,
     age: age,
     subjects: [...subjects],
@@ -38,10 +39,11 @@ router.put("/student/:id", async (req: Request, res: Response) => {
     const student = await studentModel.findById(id);
     if (!student)
       return res
-        .status(405)
+        .status(404)
         .json({ message: "Student is not in the database" });
 
-    student.name = req.body.name || student.name;
+    student.firstName = req.body.firstName || student.firstName;
+    student.lastName = req.body.lastName || student.lastName;
     student.studentClass = req.body.studentClass || student.studentClass;
     student.age = req.body.age || student.age;
     const subjects = [...req.body.subjects, ...student.subjects];
