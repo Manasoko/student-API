@@ -9,11 +9,11 @@ const port = process.env.SERVER_PORT || 5000;
 
 app.use(bodyParser.json())
 
-app.get('/', (req, res) => {
+app.get('/api/v1', (req, res) => {
   res.send('Hello, World!');
 });
 
-app.use('/', routes);
+app.use('/api/v1', routes);
 
 (async () => {
   await mongoose.connect(process.env.MONGODB_URI as string);
