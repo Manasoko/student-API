@@ -7,7 +7,8 @@
   "scripts": {
     "test": "jest --config jest.config.cjs",
     "test:watch": "npm run test -- --watch",
-    "dev": "nodemon --watch src --ext ts,js --exec node --import ./register-ts.mjs src/app.ts"
+    "dev": "nodemon --watch src --ext ts,js --exec node --import ./register-ts.mjs src/app.ts",
+    "start": "node --import ./register-ts.mjs src/app.ts"
   },
   "keywords": [
     "bootcamp",
