@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get("/students", async (req: Request, res: Response) => {
   const students = await studentModel.find();
+  console.info("Fetched all students", students.length);
   return res.status(200).json(students);
 });
 
@@ -23,15 +24,17 @@ router.post("/student", async (req: Request, res: Response) => {
     age: age,
     subjects: [...subjects],
   });
-
+  console.info("Student created successfully", student._id);
   return res.status(201).json({ message: "Created successfully", student:student });
 });
 
 router.get("/student/:id", async (req: Request, res: Response) => {
   const id = req.params.id;
   const student = await studentModel.findById(id);
-  if (!student)
+  if (!student) {
+    console.error("Student not found");
     return res.status(404).json({ message: "Student is not in the database" });
+  }
   return res.status(200).json(student);
 });
 
@@ -55,6 +58,7 @@ router.put("/student/:id", async (req: Request, res: Response) => {
     student.subjects = [...filteredSubjects];
 
     await student.save();
+    console.info("Student updated successfully", student._id);
     return res.status(201).json({ message: "Updated successfully" });
   } catch (error) {
     console.log(error);
@@ -68,6 +72,7 @@ router.delete("/student/:id", async (req: Request, res: Response) => {
   const id = req.params.id;
   try {
     await studentModel.findByIdAndDelete(id);
+    console.info("Student deleted successfully", id);
     return res.status(200).json({ message: "Deleted successfully" });
   } catch (error) {
     return res
