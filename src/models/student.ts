@@ -11,6 +11,6 @@ const studentSchema = new Schema<Student>({
   subjects: [{ type: String, trim: true, required: true }],
 });
 
-const studentModel = model<Student>('Task', studentSchema);
+const studentModel = model<Student>('Student', studentSchema);
 
 export default studentModel;

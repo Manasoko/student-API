@@ -16,7 +16,7 @@ router.post("/student", async (req: Request, res: Response) => {
   if (!firstName || !lastName || !studentClass || !age || !subjects)
     return res.status(400).json({ message: "All fields are required" });
 
-  await studentModel.create({
+  const student = await studentModel.create({
     firstName: firstName,
     lastName: lastName,
     studentClass: studentClass,
@@ -24,12 +24,14 @@ router.post("/student", async (req: Request, res: Response) => {
     subjects: [...subjects],
   });
 
-  return res.status(201).json({ message: "Created successfully" });
+  return res.status(201).json({ message: "Created successfully", student:student });
 });
 
 router.get("/student/:id", async (req: Request, res: Response) => {
   const id = req.params.id;
   const student = await studentModel.findById(id);
+  if (!student)
+    return res.status(404).json({ message: "Student is not in the database" });
   return res.status(200).json(student);
 });
 
@@ -71,6 +73,21 @@ router.delete("/student/:id", async (req: Request, res: Response) => {
     return res
       .status(500)
       .json({ message: "Something happened", error: error });
+  }
+});
+
+router.get('/healthcheck', (req: Request, res: Response) => {
+  const healthcheck = {
+    uptime: process.uptime(),
+    responseTime: process.hrtime(),
+    message: 'OK',
+    timestamp: Date.now()
+  };
+  try {
+    res.send(healthcheck);
+  } catch (error) {
+    healthcheck.message = error as string;
+    res.status(503).send();
   }
 });
 

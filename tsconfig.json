@@ -1,19 +1,14 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout
     "rootDir": "./src",
     "outDir": "./dist",
 
     // Environment Settings
-    // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
     "target": "esnext",
-    // "types": [],
-    // For nodejs:
     "lib": ["esnext"],
-    "types": ["node"],
-    // and npm install -D @types/node
+    "types": ["node", "jest"],
 
     // Other Outputs
     "sourceMap": true,
@@ -35,10 +30,13 @@
     // Recommended Options
     "strict": true,
     "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
+    // "verbatimModuleSyntax": true,
     "noUncheckedSideEffectImports": true,
+    // "isolatedModules": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
-  }
+    "esModuleInterop": true,
+  },
+    "include": ["src", "jest.config.cjs"],
+    "exclude": ["node_modules", "dist"]
 }
