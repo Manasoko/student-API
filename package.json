@@ -4,8 +4,9 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "test": "jest --config jest.config.cjs",
-    "test:watch": "npm run test -- --watch",
+    "test": "NODE_ENV=test jest",
+    "test:watch": "NODE_ENV=test jest --watch",
+    "test:coverage": "NODE_ENV=test jest --coverage",
     "dev": "nodemon --watch src --ext ts,js --exec node --import ./register-ts.mjs src/app.ts"
   },
   "keywords": [],
@@ -13,6 +14,7 @@
   "license": "ISC",
   "devDependencies": {
     "@testcontainers/mysql": "^11.7.1",
+    "@types/express": "^5.0.3",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.7.0",
     "@types/sequelize": "^4.28.20",
@@ -25,7 +27,6 @@
     "ts-node": "^10.9.2"
   },
   "dependencies": {
-    "@types/express": "^5.0.3",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "mysql2": "^3.15.1",

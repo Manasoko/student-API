@@ -68,25 +68,26 @@ export const createRouter = (sequelizeInstance: Sequelize = sequelize) => {
         if (!id) {
             return res.status(403).json({ message: "Please provide an Id" });
         }
-        try {
-            const [affectedCount] = await Student.update(
-                {
-                    name: req.body?.name,
-                    age: req.body?.age,
-                    course: req.body?.course,
-                },
-                {
-                    where: { id },
-                }
-            );
 
-            if (affectedCount === 0) {
-                return res.status(404).json({ 
-                    message: "Student not found" 
-                });
+        try {
+            const student = await Student.findByPk(id);
+            if (!student) {
+                console.error("No student in Database");
+                return res.status(404).json({ message: "Student not found in the database" });
             }
 
-            res.status(200).json({ message: "Updated successfully" });
+            const updateData: Record<string, unknown> = {};
+            if (req.body?.name !== undefined) updateData.name = req.body.name;
+            if (req.body?.age !== undefined) updateData.age = req.body.age;
+            if (req.body?.course !== undefined) updateData.course = req.body.course;
+
+            if (Object.keys(updateData).length === 0) {
+                return res.status(400).json({ message: "No fields provided to update" });
+            }
+
+            const updatedStudent = await student.update(updateData);
+
+            res.status(200).json({ student: updatedStudent });
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: "Internal server error" });
