@@ -109,8 +109,7 @@ export const createRouter = (sequelizeInstance: Sequelize = sequelize) => {
                 message: "Student not found" 
             });
         }
-
-        await sequelizeInstance.query("ALTER TABLE Students AUTO_INCREMENT = 1");
+        console.info("Deleted the student");
         res.status(200).json({ message: "Deleted successfully" });
     });
 
