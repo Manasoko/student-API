@@ -8,8 +8,8 @@
     "test:watch": "NODE_ENV=test jest --watch",
     "test:coverage": "NODE_ENV=test jest --coverage",
     "dev": "nodemon --watch src --ext ts,js --exec node --import ./register-ts.mjs src/app.ts",
-    "start": "npm run build && node dist/app.js",
-    "build": "tsc"
+    "start": "node dist/app.js",
+    "build": "rimraf dist/ && tsc"
   },
   "keywords": [],
   "author": "",
@@ -27,7 +27,8 @@
     "supertest": "^7.1.4",
     "testcontainers": "^11.7.1",
     "ts-jest": "^29.4.4",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "dotenv": "^17.2.3",

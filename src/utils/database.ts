@@ -27,7 +27,7 @@ const createSequelizeInstance = (config?: Config) => {
         process.env.DATABASE_NAME || '',
         process.env.DATABASE_USER || 'root',
         process.env.DATABASE_PASSWORD,
-        { dialect: 'mysql', host: 'localhost' }
+        { dialect: 'mysql', host: 'mysql' }
     );
 };
 

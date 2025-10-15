@@ -49,17 +49,17 @@ migrate-reset:
 # Run the API (development mode)
 run:
 	@echo "$(GREEN)Starting $(APP_NAME) in development mode...$(NC)"
-	npx nodemon --exec "node --import ./register-ts.mjs src/app.ts"
+	npm run dev
 
 # Run the API (production)
 start:
 	@echo "$(GREEN)Starting $(APP_NAME) in production mode...$(NC)"
-	NODE_ENV=production node src/app.ts
+	NODE_ENV=production npm start
 
 # Run tests
 test:
 	@echo "$(GREEN)Running tests...$(NC)"
-	npx jest --detectOpenHandles --runInBand
+	npm test
 
 # Lint the code
 lint:
@@ -71,6 +71,10 @@ format:
 	@echo "$(GREEN)Formatting code with Prettier...$(NC)"
 	npx prettier --write .
 
+build:
+	@echo "$(GREEN)Building the project...$(NC)"
+	npm run build
+
 # Clean project (dangerous)
 clean:
 	@echo "$(YELLOW)Cleaning up project...$(NC)"
@@ -79,3 +83,29 @@ clean:
 	rm -rf coverage
 
 .PHONY: help install migrate migrate-reset run start test lint format clean
+
+# -----------------------------
+# FOR DOCKER USAGE
+# -----------------------------
+
+# Build Docker image
+docker-build:
+	@echo "$(GREEN)Building Docker image...$(NC)"
+	docker build -t $(DOCKER_IMAGE) .
+# Run Docker container
+docker-run:
+	@echo "$(GREEN)Running Docker container...$(NC)"
+	docker run -d -p 3000:3000 --name $(DOCKER_CONTAINER) --env-file $(ENV_FILE) $(DOCKER_IMAGE)
+# Stop Docker container
+docker-stop:
+	@echo "$(YELLOW)Stopping Docker container...$(NC)"
+	docker stop $(DOCKER_CONTAINER) || true
+	docker rm $(DOCKER_CONTAINER) || true
+# View Docker container logs
+docker-logs:
+	@echo "$(GREEN)Viewing Docker container logs...$(NC)"
+	docker logs -f $(DOCKER_CONTAINER)
+# Remove Docker image
+docker-clean:
+	@echo "$(YELLOW)Removing Docker image...$(NC)"
+	docker rmi $(DOCKER_IMAGE) || true
