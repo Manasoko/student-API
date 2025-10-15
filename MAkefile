@@ -47,7 +47,7 @@ migrate-reset:
 	npx sequelize-cli db:migrate
 
 # Run the API (development mode)
-run:
+run-dev:
 	@echo "$(GREEN)Starting $(APP_NAME) in development mode...$(NC)"
 	npm run dev
 
@@ -84,6 +84,15 @@ clean:
 
 .PHONY: help install migrate migrate-reset run start test lint format clean
 
+# Run Docker container
+run:
+	@echo "$(GREEN)Running Docker container...$(NC)"
+	docker-compose up -d
+# Stop Docker container
+stop:
+	@echo "$(YELLOW)Stopping Docker container...$(NC)"
+	docker-compose down -v
+
 # -----------------------------
 # FOR DOCKER USAGE
 # -----------------------------
@@ -92,15 +101,6 @@ clean:
 docker-build:
 	@echo "$(GREEN)Building Docker image...$(NC)"
 	docker build -t $(DOCKER_IMAGE) .
-# Run Docker container
-docker-run:
-	@echo "$(GREEN)Running Docker container...$(NC)"
-	docker run -d -p 3000:3000 --name $(DOCKER_CONTAINER) --env-file $(ENV_FILE) $(DOCKER_IMAGE)
-# Stop Docker container
-docker-stop:
-	@echo "$(YELLOW)Stopping Docker container...$(NC)"
-	docker stop $(DOCKER_CONTAINER) || true
-	docker rm $(DOCKER_CONTAINER) || true
 # View Docker container logs
 docker-logs:
 	@echo "$(GREEN)Viewing Docker container logs...$(NC)"
