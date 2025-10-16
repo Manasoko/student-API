@@ -120,10 +120,9 @@ Responses:
 Example request:
 ```json
 {
-  "firstName": "Jane",
-  "lastName": "Doe",
-  "email": "jane.doe@example.com",
-  "dob": "2000-05-15"
+  "name": "Jane Doe",
+  "age": 23,
+  "course": "Comp. Science",
 }
 ```
 
@@ -158,7 +157,7 @@ Student (example)
 }
 ```
 
-## Examples (curl)
+## Examples
 
 Check the `Student.postman_collection.json` for examples
 
@@ -173,7 +172,7 @@ DATABASE_NAME=database_name
 DATABASE_USER=root
 DATABASE_PASSWORD=your_root_password
 ```
-3. Start: `make run` or `make docker-run`
+3. Start: `make run` or `make run-dev`
 4. API available at `http://localhost:8080/api/v1`
 
 Optional: run with Docker by providing a Dockerfile and docker-compose.yml pointing at the datastore for this repo.
@@ -195,4 +194,3 @@ Optional: run with Docker by providing a Dockerfile and docker-compose.yml point
 
 --- 
 This README is intentionally implementation-agnostic; adapt validation, auth, and storage details to your chosen stack.
-```
