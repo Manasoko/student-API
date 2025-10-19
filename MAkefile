@@ -6,8 +6,9 @@
 APP_NAME = student-api
 ENV_FILE = .env
 NODE_ENV ?= development
-DOCKER_IMAGE = mana/student-api
-DOCKER_CONTAINER = student-api
+DOCKER_IMAGE = student-api.1.0.0
+DOCKER_CONTAINER = student-api.1.0.0
+DOCKER_USERNAME = manajay
 
 # Colors for nice output
 GREEN = \033[0;32m
@@ -105,6 +106,9 @@ docker-build:
 docker-logs:
 	@echo "$(GREEN)Viewing Docker container logs...$(NC)"
 	docker logs -f $(DOCKER_CONTAINER)
+docker-push:
+	@echo "$(GREEN)Viewing Docker container logs...$(NC)"
+	docker push $(DOCKER_USERNAME)/$(DOCKER_CONTAINER)
 # Remove Docker image
 docker-clean:
 	@echo "$(YELLOW)Removing Docker image...$(NC)"
