@@ -30,7 +30,7 @@ if (NODE_ENV !== "test") {
                 await sequelize.sync();
             }
         } catch (error) {
-            console.error("Unable to connect to the database:", error);
+            console.error("Unable to connect to the database:  ", error);
         }
     })();
     app.listen(PORT, () => {
