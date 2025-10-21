@@ -3,11 +3,14 @@ name: Student API CI/CD Pipeline
 on:
   push:
     branches:
-     - main
-     - origin/main
+      - main
     paths:
-     - 'src/**/*.ts'
-     - 'tests/**/*.ts'
+      - 'src/**/*.ts'
+      - 'tests/**/*.ts'
+      - 'package*.json'
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
