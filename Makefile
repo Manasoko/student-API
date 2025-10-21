@@ -6,8 +6,8 @@
 APP_NAME = student-api
 ENV_FILE = .env
 NODE_ENV ?= development
-DOCKER_IMAGE = student-api.1.0.0
-DOCKER_CONTAINER = student-api.1.0.0
+DOCKER_IMAGE = student-api:1.0.0
+DOCKER_CONTAINER = student-api:1.0.0
 DOCKER_USERNAME = manajay
 
 # Colors for nice output
