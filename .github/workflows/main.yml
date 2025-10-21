@@ -27,6 +27,29 @@ jobs:
       - name: Build Node Project
         run: make build
 
+  test:
+    runs-on: self-hosted
+    needs: build
+    timeout-minutes: 10
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v5
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+      
+      - name: Install Dependencies
+        run: make install
+      
+      - name: Run Tests
+        run: make test
+      
+      - name: Run Linting
+        run: make lint
+
   docker:
     name: Docker Build and Push
     runs-on: self-hosted
